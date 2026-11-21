@@ -1,0 +1,81 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Lista de Pacientes
+{% endblock %}
+
+{% block content %}
+
+<div class="container mt-4">
+
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h1 class="mb-0">Listado de Pacientes</h1>
+        <a href="#" type="button" class="theme-success btn-solid btn-styled">
+            <i class="bi bi-plus-circle"></i> Registrar
+        </a>
+    </div>
+
+    <table class="table table-striped table-hover table-bordered">
+
+        <thead class="table-dark">
+            <tr>
+                <th scope="col">Cédula</th>
+                <th scope="col">Nombre</th>
+                <th scope="col">Apellidos</th>
+                <th scope="col">Fecha de nacimiento</th>
+                <th scope="col">Logo</th>
+                <th scope="col">Acciones</th>
+            </tr>
+        </thead>
+
+        <tbody>
+
+            {% for paciente in pacientes %}
+
+                <tr>
+                    <th scope="row">{{ paciente.cedula_pac }}</th>
+
+                    <td>{{ paciente.nombre_pac }}</td>
+
+                    <td>{{ paciente.apellidos_pac }}</td>
+
+                    <td>{{ paciente.fecha_nac_pac }}</td>
+
+                    <td>
+                        {% if paciente.foto_pac %}
+                            <img src="{{ paciente.foto_pac.url }}"
+                                 width="100"
+                                 class="img-thumbnail">
+                        {% else %}
+                            Sin imagen
+                        {% endif %}
+                    </td>
+
+                    <td>
+                        <button type="button" disabled class="theme-warning btn-solid btn-styled">
+                            Ver detalle
+                        </button>
+
+                        <button type="button" disabled class="theme-primary btn-solid btn-styled">Editar</button>
+
+                        <button type="button" disabled class="theme-danger btn-solid btn-styled">Eliminar</button>
+                    </td>
+                </tr>
+
+            {% empty %}
+
+                <tr>
+                    <td colspan="6" class="text-center">
+                        No hay pacientes registrados.
+                    </td>
+                </tr>
+
+            {% endfor %}
+
+        </tbody>
+
+    </table>
+
+</div>
+
+{% endblock %}

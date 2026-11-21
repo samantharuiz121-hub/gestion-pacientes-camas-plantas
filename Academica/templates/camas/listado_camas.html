@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Lista de Camas
+{% endblock %}
+
+{% block content %}
+
+<div class="container mt-4">
+
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h1 class="mb-0">Listado de Camas</h1>
+        <a href="#" type="button" class="theme-success btn-solid btn-styled">
+            <i class="bi bi-plus-circle"></i> Registrar
+        </a>
+    </div>
+
+    <table class="table table-striped table-hover table-bordered">
+
+        <thead class="table-dark">
+            <tr>
+                <th scope="col">Código de cama</th>
+                <th scope="col">Detalle</th>
+                <th scope="col">Fecha</th>
+                <th scope="col">Planta</th>
+                <th scope="col">Paciente</th>
+                <th scope="col">Acciones</th>
+            </tr>
+        </thead>
+
+        <tbody>
+
+            {% for cama in camas %}
+
+                <tr>
+                    <th scope="row">{{ cama.codigo_cam }}</th>
+                    <td>{{ cama.detalle_cam }}</td>
+                    <td>{{ cama.fecha }}</td>
+                    <td>{{ cama.numero_planta.nombre_pln }}</td>
+                    <td>{{ cama.cedula_paciente.nombre_pac }} {{ cama.cedula_paciente.apellidos_pac }}</td>
+                    <td>
+                        <button type="button" disabled class="theme-warning btn-solid btn-styled">
+                            Ver detalle
+                        </button>
+                        <button type="button" disabled class="theme-primary btn-solid btn-styled">Editar</button>
+                        <button type="button" disabled class="theme-danger btn-solid btn-styled">Eliminar</button>
+                    </td>
+                </tr>
+
+            {% empty %}
+                <tr>
+                    <td colspan="6" class="text-center">No hay camas registradas.</td>
+                </tr>
+            {% endfor %}
+
+        </tbody>
+
+    </table>
+
+</div>
+
+{% endblock %}
